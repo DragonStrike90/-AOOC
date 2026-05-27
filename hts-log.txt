@@ -1,0 +1,15 @@
+HTTrack3.49-2+htsswf+htsjava launched on Tue, 26 May 2026 21:37:26 at https://pay-service.ageoforiginsgame.com/#/
+(C:\HTTrack\httrack.exe https://pay-service.ageoforiginsgame.com/#/ -O ageoforigins_clon -q )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+21:38:39	Error: 	"Unable to get server's address: unknown error" (-5) after 2 retries at link primary/robots.txt (from primary/primary)
+21:38:41	Warning: 	Retry after error -5 (Unable to get server's address: No such host is known. ) at link primary/ (from primary/primary)
+21:39:49	Warning: 	Retry after error -5 (Unable to get server's address: unknown error) at link primary/ (from primary/primary)
+21:39:55	Error: 	"Unable to get server's address: unknown error" (-5) after 2 retries at link primary/ (from primary/primary)
+
+HTTrack Website Copier/3.49-2 mirror complete in 2 minutes 29 seconds : 16 links scanned, 11 files written (2400676 bytes overall), 1 files updated [8001 bytes received at 53 bytes/sec], 1472 bytes transferred using HTTP compression in 2 files, ratio 60%, 1.2 requests per connection
+(2 errors, 2 warnings, 0 messages)

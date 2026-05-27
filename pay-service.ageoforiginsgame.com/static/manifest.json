@@ -1,0 +1,13 @@
+{
+    "name": "Age of Origins",
+    "short_name": "AOZ",
+    "start_url": "/",
+    "background_color": "#535353",
+    "display": "standalone",
+    "orientation": "natural",
+    "icons": [{
+        "src": "/static/img/header.9a39321.png",
+        "sizes": "148x148",
+        "type": "image/png"
+    }]
+}
